@@ -1,6 +1,6 @@
 # 🗃️ Test with SQL
 
-A PostgreSQL database project with Docker containerization, featuring an e-commerce-like schema for managing users, products, stock, and reservations. This project includes automated data generation scripts and a complete database setup with sample data.
+A repository dedicated to exploring and testing various SQL features and functionalities, with practical examples and schema designs.
 
 ## 📋 Index
 
