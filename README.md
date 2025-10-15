@@ -4,7 +4,14 @@ A PostgreSQL database project with Docker containerization, featuring an e-comme
 
 ## 📋 Index
 
-## 01 🔍 FULLTEXT Search Implementation
+- [🚀 Implementations](#-implementations)
+  - [01. 🔍 FULLTEXT Search Implementation](#01--fulltext-search-implementation)
+- [📊 Database Schema](#-database-schema)
+- [📄 License](#-license)
+
+## 🚀 Implementations
+
+### 01. 🔍 FULLTEXT Search Implementation
 
 FULLTEXT search is a MySQL feature that allows for fast and efficient searching of text content within columns. It's particularly useful for searching large amounts of text data and provides better performance than traditional `LIKE` queries.
 
