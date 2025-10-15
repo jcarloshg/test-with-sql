@@ -1,15 +1,13 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 -- Create Users table
 CREATE TABLE users (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    uuid VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
 -- Create Products table
 CREATE TABLE products (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    uuid VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL
@@ -17,19 +15,19 @@ CREATE TABLE products (
 
 -- Create Stock table
 CREATE TABLE stock (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    product_uuid UUID NOT NULL,
-    available_quantity INTEGER NOT NULL DEFAULT 0,
-    reserved_quantity INTEGER NOT NULL DEFAULT 0,
+    uuid VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    product_uuid VARCHAR(36) NOT NULL,
+    available_quantity INT NOT NULL DEFAULT 0,
+    reserved_quantity INT NOT NULL DEFAULT 0,
     FOREIGN KEY (product_uuid) REFERENCES products (uuid)
 );
 
 -- Create Reservations table
 CREATE TABLE reservations (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    user_uuid UUID NOT NULL,
-    product_id UUID NOT NULL,
-    quantity INTEGER NOT NULL,
+    uuid VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    user_uuid VARCHAR(36) NOT NULL,
+    product_id VARCHAR(36) NOT NULL,
+    quantity INT NOT NULL,
     status VARCHAR(20) NOT NULL CHECK (
         status IN (
             'PENDING',
@@ -38,9 +36,7 @@ CREATE TABLE reservations (
             'EXPIRED'
         )
     ),
-    expires_at TIMESTAMP
-    WITH
-        TIME ZONE NOT NULL,
-        FOREIGN KEY (user_uuid) REFERENCES users (uuid),
-        FOREIGN KEY (product_id) REFERENCES products (uuid)
+    expires_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_uuid) REFERENCES users (uuid),
+    FOREIGN KEY (product_id) REFERENCES products (uuid)
 );
