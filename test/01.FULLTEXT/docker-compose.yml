@@ -1,0 +1,19 @@
+services:
+  db-commands-service:
+    container_name: db-commands-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=123456
+      - MYSQL_DATABASE=db_for_commands
+    volumes:
+      - db-commands-vol:/var/lib/mysql
+
+volumes:
+  db-commands-vol:
+    driver: local
