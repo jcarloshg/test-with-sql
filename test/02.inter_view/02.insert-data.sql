@@ -2014,3 +2014,30 @@ INSERT INTO stock (uuid, product_uuid, available_quantity, reserved_quantity) VA
 ('1d4ea6e7-bc94-4b4a-b97b-7d1091a67048', '3163badf-12b3-4cb1-befe-563a1379cf50', 62, 21), 
 ('7eb71c04-6256-4498-821a-abb6d3c6e296', 'b5357a67-06d5-407c-bf7f-b49ceae45274', 27, 18), 
 ('c754dbca-7cab-43b8-901d-8a24718fdcbf', '863de126-30d1-4e09-8a0a-c95e2c650b78', 29, 14);
+
+
+-- ---------------------------------------------------------
+-- INSERT DUMMY DATA
+-- ---------------------------------------------------------
+
+-- Note: We intentionally add ties (Same salary) to test RANK vs DENSE_RANK
+INSERT INTO employees (name, department, salary)
+VALUES
+    ( 'Alice', 'Engineering', 120000),
+    ( 'Bob', 'Engineering', 120000), -- Tie with Alice
+    ( 'Charlie', 'Engineering', 110000),
+    ( 'David', 'Engineering', 90000),
+    ( 'Eve', 'HR', 80000),
+    ( 'Frank', 'HR', 80000), -- Tie with Eve
+    ( 'Grace', 'HR', 75000),
+    ( 'Hank', 'Sales', 150000), -- High earner
+    ( 'Ivy', 'Sales', 140000);
+
+-- Note: Sales for 5 consecutive days to test LAG/LEAD
+INSERT INTO sales (sale_date, amount)
+VALUES 
+    ('2024-01-01', 1000), -- Day 1
+    ('2024-01-02', 1500), -- Day 2 (Growth)
+    ('2024-01-03', 1200), -- Day 3 (Drop)
+    ('2024-01-04', 2000), -- Day 4 (Growth)
+    ('2024-01-05', 3000); -- Day 5 (Big Growth)

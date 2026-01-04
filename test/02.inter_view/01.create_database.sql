@@ -42,3 +42,23 @@ CREATE TABLE reservations (
     FOREIGN KEY (user_uuid) REFERENCES users (uuid),
     FOREIGN KEY (product_id) REFERENCES products (uuid)
 );
+
+-- Clean up previous tests
+DROP TABLE IF EXISTS sales;
+
+DROP TABLE IF EXISTS employees;
+
+-- 1. Employees Table (For Ranking & Partitioning)
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary INT
+);
+
+-- 2. Sales Table (For Time Travel & Running Totals)
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    sale_date DATE,
+    amount INT
+);
