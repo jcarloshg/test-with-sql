@@ -24,25 +24,6 @@ CREATE TABLE stock (
     FOREIGN KEY (product_uuid) REFERENCES products (uuid)
 );
 
--- Create Reservations table
-CREATE TABLE reservations (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    user_uuid UUID NOT NULL,
-    product_id UUID NOT NULL,
-    quantity INTEGER NOT NULL,
-    status VARCHAR(20) NOT NULL CHECK (
-        status IN (
-            'PENDING',
-            'CONFIRMED',
-            'CANCELLED',
-            'EXPIRED'
-        )
-    ),
-    expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    FOREIGN KEY (user_uuid) REFERENCES users (uuid),
-    FOREIGN KEY (product_id) REFERENCES products (uuid)
-);
-
 -- Clean up previous tests
 DROP TABLE IF EXISTS sales;
 
