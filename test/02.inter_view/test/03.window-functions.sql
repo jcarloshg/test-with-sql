@@ -92,3 +92,11 @@ FROM products;
 -- // ─────────────────────────────────────
 
 -- LAG(col, n) -> Access data from previous rows
+-- Example: Compare each sale amount with the previous day's sale
+SELECT
+    sale_date,
+    amount,
+    LAG(amount, 1) OVER (
+        ORDER BY sale_date
+    ) AS previous_day_amount
+FROM sales;
